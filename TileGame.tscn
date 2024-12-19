@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbtwa1f12hxgp"]
+
+[ext_resource type="Script" path="res://Game Manager.gd" id="1_ufn33"]
+[ext_resource type="PackedScene" uid="uid://d38q37l48pryt" path="res://uploads_files_4680501_table+bake.glb" id="2_tvih0"]
+[ext_resource type="PackedScene" uid="uid://llpq7xuxejuw" path="res://Old_Chair.glb" id="3_ega8a"]
+[ext_resource type="Texture2D" uid="uid://cipiajcdtmyci" path="res://1200px-SMG2_Website_Background_(NA).jpg" id="4_sxwhl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_th1io"]
+size = Vector3(0.075, 0.0597656, 0.075)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aqe6k"]
+panorama = ExtResource("4_sxwhl")
+
+[sub_resource type="Sky" id="Sky_tk251"]
+sky_material = SubResource("PanoramaSkyMaterial_aqe6k")
+
+[sub_resource type="Environment" id="Environment_5e8ug"]
+background_mode = 2
+sky = SubResource("Sky_tk251")
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_ufn33")
+board_shape = "6x6"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-3.51372e-08, 0.594837, -0.803846, 2.60011e-08, 0.803846, 0.594837, 1, 2.84217e-14, -4.37113e-08, -0.723145, 1.05626, -0.00335804)
+fov = 65.2
+
+[node name="Game Manager" type="Node" parent="."]
+
+[node name="Assets" type="Node3D" parent="."]
+
+[node name="uploads_files_4680501_table+bake" parent="Assets" instance=ExtResource("2_tvih0")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Assets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54148, 0.793937, -0.0664063)
+size = Vector3(0.356934, 1.60587, 0.316406)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Assets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038, 0.748, 0.606907)
+size = Vector3(0.072, 0.011, 0.072)
+
+[node name="firststatic" type="StaticBody3D" parent="Assets/CSGBox3D2"]
+
+[node name="firstcollision" type="CollisionShape3D" parent="Assets/CSGBox3D2/firststatic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0232303, 0)
+shape = SubResource("BoxShape3D_th1io")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Assets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038, 0.748, 0.681907)
+size = Vector3(0.072, 0.011, 0.072)
+
+[node name="secondstaticbody" type="StaticBody3D" parent="Assets/CSGBox3D3"]
+
+[node name="secondcollision" type="CollisionShape3D" parent="Assets/CSGBox3D3/secondstaticbody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0232303, 0)
+shape = SubResource("BoxShape3D_th1io")
+
+[node name="Old_Chair" parent="Assets" instance=ExtResource("3_ega8a")]
+transform = Transform3D(0.708451, 0, -0.70576, 0, 1, 0, 0.70576, 0, 0.708451, 0.916733, 0, -0.795119)
+
+[node name="Board" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00294316, 0.751219, -0.197776)
+
+[node name="env" type="Node3D" parent="."]
+transform = Transform3D(-3.51372e-08, 0.594837, -0.803846, 2.60011e-08, 0.803846, 0.594837, 1, 2.84217e-14, -4.37113e-08, -0.723145, 1.05626, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_5e8ug")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(1, -2.06343e-08, -5.17687e-09, 2.06343e-08, 0.881567, 0.472059, -5.17684e-09, -0.472059, 0.881567, 2.14969e-07, 6.64595, 4.91793)
+shadow_enabled = true

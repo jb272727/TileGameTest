@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://db5ek2ji3mmvy"]
+
+[node name="Tile spawner" type="Node3D"]

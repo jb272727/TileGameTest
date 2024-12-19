@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbtwa1f12hxgp"]
+
+[ext_resource type="Script" path="res://Game Manager.gd" id="1_ufn33"]
+[ext_resource type="PackedScene" uid="uid://d38q37l48pryt" path="res://uploads_files_4680501_table+bake.glb" id="2_tvih0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_th1io"]
+size = Vector3(0.075, 0.0597656, 0.075)
+
+[node name="Game" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-3.51372e-08, 0.594837, -0.803846, 2.60011e-08, 0.803846, 0.594837, 1, 1.77636e-15, -4.37114e-08, -0.723145, 1.22089, 0)
+fov = 54.7489
+
+[node name="Game Manager" type="Node" parent="."]
+script = ExtResource("1_ufn33")
+max_distance = null
+
+[node name="Assets" type="Node3D" parent="."]
+
+[node name="uploads_files_4680501_table+bake" parent="Assets" instance=ExtResource("2_tvih0")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Assets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40665, 0.793937, -0.0664063)
+size = Vector3(0.356934, 1.60587, 0.316406)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Assets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038, 0.748, 0.038)
+size = Vector3(0.072, 0.011, 0.072)
+
+[node name="firststatic" type="StaticBody3D" parent="Assets/CSGBox3D2"]
+
+[node name="firstcollision" type="CollisionShape3D" parent="Assets/CSGBox3D2/firststatic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0201172, 0)
+shape = SubResource("BoxShape3D_th1io")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Assets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038, 0.748, 0.113)
+size = Vector3(0.072, 0.011, 0.072)
+
+[node name="secondstaticbody" type="StaticBody3D" parent="Assets/CSGBox3D3"]
+
+[node name="secondcollision" type="CollisionShape3D" parent="Assets/CSGBox3D3/secondstaticbody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0201172, 0)
+shape = SubResource("BoxShape3D_th1io")
